@@ -1,0 +1,58 @@
+
+@if (tasks$ | async; as tasks) {
+<div class="card">
+  <p-table #dt1 [value]="tasks" styleClass="p-datatable-striped" [paginator]="true" [rows]="7"
+    [globalFilterFields]="['title', 'description']">
+
+    <ng-template pTemplate="caption">
+      <div class="flex justify-content-start caption gap-8">
+        <p-iconField iconPosition="left">
+          <p-inputIcon>
+            <i class="pi pi-search"></i>
+          </p-inputIcon>
+          <input pInputText type="text" [formControl]="filterFC" (input)="filter($event, dt1)"
+            placeholder="Search keyword" />
+        </p-iconField>
+        <p-button label="Create Task" (onClick)="createEditTask(undefined)" />
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="status" style="width:10%">
+          Status <p-sortIcon field="status" />
+        </th>
+        <th pSortableColumn="title" style="width:25%">
+          Title <p-sortIcon field="title" />
+        </th>
+        <th pSortableColumn="description" style="width:35%">
+          Description <p-sortIcon field="description" />
+        </th>
+        <th pSortableColumn="dueDate" style="width:20%">
+          Due Date <p-sortIcon field="dueDate" />
+        </th>
+        <th style="width:20%">
+          Action
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-task>
+      <tr>
+        <td>{{ task.status }}</td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.dueDate | date: 'medium'}}</td>
+        <td>
+          <div class="flex gap-1">
+            <p-button icon="pi pi-pen-to-square" severity="info" (onClick)="createEditTask(task)"></p-button>
+            <p-button icon="pi pi-trash" severity="danger" (onClick)="deleteTask($event, task)"></p-button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-confirmDialog />
+
+}

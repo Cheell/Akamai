@@ -1,0 +1,9 @@
+.main {
+  padding-top: 1rem;
+  .flex.flex-column.gap-1 {
+    min-width: 25rem;
+    .p-dropdown.p-component.p-inputwrapper.p-dropdown-clearable.p-inputwrapper-filled {
+      min-width: 25rem;
+    }
+  }
+}

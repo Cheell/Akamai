@@ -1,0 +1,40 @@
+
+@let selectedTask = selectedTask$ | async;
+    
+<div class="main card flex justify-content-center" [formGroup]="form">
+  <div class="flex flex-column gap-5 form-container">
+    <div class="flex flex-column gap-1">
+      <label for="title">Title</label>
+      <input type="text" aria-describedby="title-help" id="title" pInputText [formControl]="form.controls.title" />
+      <small id="title-help">At least 3 letters</small>
+    </div>
+
+    <div class="flex flex-column gap-1">
+      <label for="description">Description</label>
+      <input type="text" aria-describedby="description-help" id="description" pInputText
+        [formControl]="form.controls.description" />
+      <small id="description-help">At least 5 letters</small>
+    </div>
+
+    <div class="flex flex-column gap-1">
+      <label for="status">Status</label>
+      <p-dropdown [formControl]="form.controls.status" [options]="taskStatuses" placeholder="No Status"
+        [showClear]="true" />
+      <small id="status-help">Select Status</small>
+    </div>
+
+    <div class="flex flex-column gap-1">
+      <label for="dueDate">Due Date</label>
+      <p-calendar id="dueDate" [formControl]="form.controls.dueDate" [iconDisplay]="'input'" [showIcon]="true" appendTo="body"
+        inputId="icondisplay" />
+      <small id="dueDate-help">Click to set Due Date</small>
+    </div>
+
+    <div class="buttons flex gap-5 justify-content-center">
+      <p-button (onClick)="clickDone()" label="Done"/>
+      <p-button label="Close" (onClick)="clickClose()"/>
+    </div>
+
+  </div>
+
+</div>
